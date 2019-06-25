@@ -35,23 +35,25 @@ const particlesOption = {
 }
 }
 
+const initialState = {
+  input: "",
+  imgUrl: "",
+  box: {},
+  route: "signin",
+  isSignedIn: false,
+  user: {
+    id: '',
+    name: "",
+    email: "",
+    submissions: "",
+    time: ""
+  }
+}
+
 class App extends Component {
   constructor(){
     super()
-    this.state = {
-      input: "",
-      imgUrl: "",
-      box: {},
-      route: "signin",
-      isSignedIn: false,
-      user: {
-        id: '',
-        name: "",
-        email: "",
-        submissions: "",
-        time: ""
-      }
-    }
+    this.state = initialState
   }
 
   loadUser = (data)=>{
@@ -112,7 +114,7 @@ class App extends Component {
       this.setState({isSignedIn: true})
     }  
     else{
-      this.setState({isSignedIn:false})
+      this.setState(initialState)
     }  
     this.setState({route: route})
   }
