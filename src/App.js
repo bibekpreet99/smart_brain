@@ -8,6 +8,7 @@ import Particles from 'react-particles-js';
 import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
 import Signin from "./components/Signin/Signin";
 import Register from "./components/Register/Register";
+import MyFooter from "./components/myFooter/MyFooter";
 
 
 const particlesOption = {
@@ -86,7 +87,7 @@ class App extends Component {
 
   onButtonPress = ()=>{
     this.setState({imgUrl: this.state.input})
-    fetch('http://localhost:3000/imageurl', {
+    fetch('https://safe-shore-96419.herokuapp.com/imageurl', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
@@ -96,7 +97,7 @@ class App extends Component {
     .then(response=>response.json())
     .then((response)=>{
       if(response){
-        fetch('http://localhost:3000/image', {
+        fetch('https://safe-shore-96419.herokuapp.com/image', {
           method: 'put',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
@@ -135,11 +136,18 @@ class App extends Component {
             <Rank name={this.state.user.name} submissions={this.state.user.submissions} />
             <ImageLinkForm onInputChange={this.onInputChange} onButtonPress= {this.onButtonPress}/>
             <FaceRecognition box={this.state.box} imgUrl={this.state.imgUrl}/>
+            <MyFooter />
           </div>)
           :
           (this.state.route=== 'signin')
-          ? <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
-          : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
+          ?<div> 
+            <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
+            <MyFooter/>
+          </div>
+          :<div> 
+            <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
+            <MyFooter/>
+          </div>  
         }
       </div>
   )}
