@@ -136,7 +136,6 @@ class App extends Component {
             <Rank name={this.state.user.name} submissions={this.state.user.submissions} />
             <ImageLinkForm onInputChange={this.onInputChange} onButtonPress= {this.onButtonPress}/>
             <FaceRecognition box={this.state.box} imgUrl={this.state.imgUrl}/>
-            <MyFooter />
           </div>)
           :
           (this.state.route=== 'signin')

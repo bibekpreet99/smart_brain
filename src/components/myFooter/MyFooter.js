@@ -3,7 +3,9 @@ import "./MyFooter.css";
 
 const MyFooter = ()=>{
     return(
-        <footer bg-transparent ><p> Copyright © Bibekpreet Singh 2019 </p></footer>
+        <div>
+            <footer bg-transparent ><p className="text"> Copyright © Bibekpreet Singh 2019 </p></footer>
+        </div>    
     )
 }
 
