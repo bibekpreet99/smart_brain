@@ -6,14 +6,9 @@ import ImageLinkForm from "./components/ImageLinkForm/ImageLinkForm";
 import Rank from "./components/Rank/Rank";
 import Particles from 'react-particles-js';
 import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
-import Clarifai from 'clarifai'
 import Signin from "./components/Signin/Signin";
 import Register from "./components/Register/Register";
 
-
-const app = new Clarifai.App({
-  apiKey: 'd4ed804d96aa489fa7435e43fadf8938'
-})
 
 const particlesOption = {
   particles: {
@@ -69,7 +64,6 @@ class App extends Component {
   }
 
   calculateFaceData= (data)=>{
-    console.log(data)
     const faceData = data.outputs[0].data.regions[0].region_info.bounding_box;
     const img = document.getElementById('myImg')
     const width = Number(img.width);
@@ -92,7 +86,14 @@ class App extends Component {
 
   onButtonPress = ()=>{
     this.setState({imgUrl: this.state.input})
-    app.models.predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
+    fetch('http://localhost:3000/imageurl', {
+      method: 'post',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        input: this.state.input
+      })
+    })
+    .then(response=>response.json())
     .then((response)=>{
       if(response){
         fetch('http://localhost:3000/image', {
@@ -109,6 +110,8 @@ class App extends Component {
       this.faceLocator(this.calculateFaceData(response))})
     .catch((err)=>console.log(err))
   }
+
+
   onRouteChange = (route)=>{
     if(route==='home'){
       this.setState({isSignedIn: true})

@@ -39,7 +39,7 @@ class Register extends React.Component {
         })
         .then(response=>response.json())
         .then((user)=>{
-            if(user){
+            if(user.id){
                 this.props.loadUser(user);
                 this.props.onRouteChange('home')
             }
@@ -56,6 +56,7 @@ class Register extends React.Component {
                             <div className="mt3">
                                 <label className="db fw6 lh-copy f6" htmlFor="name">Name</label>
                                 <input 
+                                    required
                                     onChange = { this.onNameChange }
                                     className="pa2 input-reset ba bg-transparent hover-bg-black hover-white " 
                                     type="name" 
@@ -66,7 +67,8 @@ class Register extends React.Component {
                             </div>
                             <div className="mt3">
                                 <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
-                                <input 
+                                <input
+                                    required 
                                     onChange = { this.onEmailChange }
                                     className="pa2 input-reset ba bg-transparent hover-bg-black hover-white " 
                                     type="email" 
@@ -78,6 +80,7 @@ class Register extends React.Component {
                             <div className="mv3">
                                 <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
                                 <input 
+                                    required
                                     onChange = { this.onPasswordChange }
                                     className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white " 
                                     type="password" 
@@ -91,7 +94,7 @@ class Register extends React.Component {
                             <input 
                                 onClick = { this.onSubmit }
                                 className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
-                                type="button" 
+                                type="submit" 
                                 value="Register"/>
                         </div>
                     </div>
